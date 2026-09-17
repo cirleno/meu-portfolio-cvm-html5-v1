@@ -1,0 +1,13 @@
+{
+  "short_name": "X-Marçal",
+  "name": "X-Marçal Técnico — Portfólio de Serviços",
+  "icons": [{
+    "src": "icon.png",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+  "start_url": "/",
+  "background_color": "#121824",
+  "theme_color": "#121824",
+  "lang": "pt-BR"
+}
