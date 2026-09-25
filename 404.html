@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="theme-color" content="#121824">
   <title>Página não encontrada — X-Marçal Técnico</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -14,6 +15,7 @@
     }
 
     html {
+      color-scheme: dark;
       color: #e0e6ed;
       background: #121824;
       display: table;
@@ -51,18 +53,26 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
+      touch-action: manipulation;
     }
 
     a:hover {
-      opacity: 0.9;
+      background: #0052a3;
+    }
+
+    a:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 2px;
     }
   </style>
 </head>
 
 <body>
-  <h1>Página não encontrada</h1>
-  <p>Desculpe, mas a página que você procura não existe ou foi movida.</p>
-  <a href="/">Voltar para o início</a>
+  <main>
+    <h1>Página não encontrada</h1>
+    <p>Desculpe, mas a página que você procura não existe ou foi movida.</p>
+    <a href="/">Voltar para o início</a>
+  </main>
 </body>
 
 </html>

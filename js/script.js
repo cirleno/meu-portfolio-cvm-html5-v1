@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.setAttribute('aria-expanded', 'true');
         navToggle.setAttribute('aria-label', 'Fechar menu');
         document.body.classList.add('nav-open');
+        navMenu.querySelector('a')?.focus();
     };
 
     if (navToggle && navMenu) {
@@ -53,7 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
         navOverlay?.addEventListener('click', closeNavMenu);
 
         navMenu.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', closeNavMenu);
+            link.addEventListener('click', () => {
+                closeNavMenu();
+                const target = link.hash ? document.querySelector(link.hash) : null;
+                target?.focus({ preventScroll: true });
+            });
         });
 
         document.addEventListener('keydown', (e) => {
@@ -63,10 +68,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > MOBILE_NAV_MAX) {
+        window.matchMedia(`(min-width: ${MOBILE_NAV_MAX + 1}px)`).addEventListener('change', (event) => {
+            if (event.matches) {
                 closeNavMenu();
             }
+        });
+    }
+
+    // === BOTÃO VOLTAR AO TOPO ===
+    const btnTopo = document.getElementById('btn-topo');
+
+    if (btnTopo) {
+        const toggleTopo = () => {
+            btnTopo.hidden = window.scrollY < 400;
+        };
+
+        toggleTopo();
+        window.addEventListener('scroll', toggleTopo, { passive: true });
+
+        btnTopo.addEventListener('click', () => {
+            window.scrollTo({ top: 0 });
+            document.getElementById('home')?.focus({ preventScroll: true });
         });
     }
 
@@ -118,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!invalidInputPattern) return;
 
         field.addEventListener('beforeinput', (event) => {
+            if (event.inputType === 'insertFromPaste' || event.inputType === 'insertFromDrop') return;
             if (event.data && invalidInputPattern.test(event.data)) {
                 event.preventDefault();
             }
@@ -209,6 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ].join('\n');
 
     if (form) {
+        form.noValidate = true;
         formFields.forEach((field) => {
             restrictFieldInput(field);
             field.addEventListener('input', () => {
@@ -282,20 +306,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryButtons = document.querySelectorAll('.item-galeria-btn');
     let lastFocused = null;
 
+    const FALLBACK_LABEL = 'Imagem ampliada do portfólio';
+
+    const setBackgroundInert = (isInert) => {
+        document.body.childNodes.forEach((node) => {
+            if (node === modal || node.nodeType !== Node.ELEMENT_NODE) return;
+            node.inert = isInert;
+        });
+    };
+
     const openModal = (img, opener) => {
         if (!modal || !modalImg || !captionText) return;
         lastFocused = opener instanceof HTMLElement ? opener : document.activeElement;
         modal.hidden = false;
         const fallback = img.dataset.source;
+        const label = img.alt || FALLBACK_LABEL;
         modalImg.onerror = () => {
             if (fallback && modalImg.getAttribute('src') !== fallback) {
                 modalImg.src = fallback;
             }
         };
+        modalImg.onload = () => {
+            if (modalImg.naturalWidth) {
+                modalImg.width = modalImg.naturalWidth;
+                modalImg.height = modalImg.naturalHeight;
+            }
+        };
         modalImg.src = img.dataset.full || img.src;
-        modalImg.alt = img.alt || 'Imagem ampliada do portfólio';
-        captionText.textContent = img.alt || '';
+        modalImg.alt = label;
+        captionText.textContent = label;
         document.body.classList.add('modal-open');
+        setBackgroundInert(true);
         closeBtn?.focus();
     };
 
@@ -303,8 +344,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal) return;
         modal.hidden = true;
         modalImg.onerror = null;
-        modalImg.src = '';
+        modalImg.onload = null;
+        modalImg.removeAttribute('src');
         document.body.classList.remove('modal-open');
+        setBackgroundInert(false);
         if (lastFocused && document.contains(lastFocused)) {
             lastFocused.focus();
         }
@@ -323,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const getModalFocusable = () => {
         if (!modal) return [];
         return [...modal.querySelectorAll(FOCUSABLE_SELECTOR)].filter(
-            (el) => el.offsetParent !== null
+            (el) => !el.disabled && !el.closest('[hidden]')
         );
     };
 

@@ -12,9 +12,9 @@
    ========================================================================== */
 
 html {
-  color: #222;
-  font-size: 1em;
-  line-height: 1.4;
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
 }
 
 /*
@@ -25,12 +25,12 @@ html {
  */
 
 hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
 }
 
 /*
@@ -45,7 +45,7 @@ iframe,
 img,
 svg,
 video {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 /*
@@ -53,9 +53,9 @@ video {
  */
 
 fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /*
@@ -63,7 +63,7 @@ fieldset {
  */
 
 textarea {
-  resize: vertical;
+    resize: vertical;
 }
 
 /* ==========================================================================
@@ -80,7 +80,7 @@ textarea {
 
 .hidden,
 [hidden] {
-  display: none !important;
+    display: none !important;
 }
 
 /*
@@ -93,16 +93,16 @@ textarea {
  */
 
 .visually-hidden {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  /* 1 */
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    /* 1 */
 }
 
 /*
@@ -113,13 +113,13 @@ textarea {
 
 .visually-hidden.focusable:active,
 .visually-hidden.focusable:focus {
-  clip: auto;
-  height: auto;
-  margin: 0;
-  overflow: visible;
-  position: static;
-  white-space: inherit;
-  width: auto;
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    white-space: inherit;
+    width: auto;
 }
 
 /*
@@ -127,7 +127,7 @@ textarea {
  */
 
 .invisible {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 /*
@@ -139,12 +139,12 @@ textarea {
 
 .clearfix::before,
 .clearfix::after {
-  content: "";
-  display: table;
+    content: "";
+    display: table;
 }
 
 .clearfix::after {
-  clear: both;
+    clear: both;
 }
 
 /* ==========================================================================
@@ -154,14 +154,14 @@ textarea {
    ========================================================================== */
 
 @media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
+    /* Style adjustments for viewports that meet the condition */
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
-  /* Style adjustments for high resolution devices */
+    (-webkit-min-device-pixel-ratio: 1.25),
+    (min-resolution: 1.25dppx),
+    (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
 }
 
 /* ==========================================================================
@@ -171,64 +171,64 @@ textarea {
    ========================================================================== */
 
 @media print {
-  *,
-  *::before,
-  *::after {
-    background: #fff !important;
-    color: #000 !important;
-    /* Black prints faster */
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
+    *,
+    *::before,
+    *::after {
+        background: #fff !important;
+        color: #000 !important;
+        /* Black prints faster */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
 
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
 
-  a[href]::after {
-    content: " (" attr(href) ")";
-  }
+    a[href]::after {
+        content: " (" attr(href) ")";
+    }
 
-  abbr[title]::after {
-    content: " (" attr(title) ")";
-  }
+    abbr[title]::after {
+        content: " (" attr(title) ")";
+    }
 
-  /*
-   * Don't show links that are fragment identifiers,
-   * or use the `javascript:` pseudo protocol
-   */
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
-  }
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+        content: "";
+    }
 
-  pre {
-    white-space: pre-wrap !important;
-  }
+    pre {
+        white-space: pre-wrap !important;
+    }
 
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
 
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
 
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
 
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
 }
 
 
@@ -262,6 +262,7 @@ textarea {
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
     font-family: var(--font-main);
     background-color: var(--dark-bg);
     color: var(--text-color);
@@ -281,6 +282,7 @@ html {
 .btn-nav,
 .nav-toggle,
 .whatsapp-float,
+.btn-topo,
 .info-card,
 .item-galeria-btn,
 .modal-close {
@@ -369,7 +371,7 @@ main#conteudo {
 }
 
 .btn-nav:hover {
-    opacity: 0.9;
+    background-color: #0052a3;
 }
 
 /* Botão hambúrguer (mobile) */
@@ -517,6 +519,40 @@ body.modal-open {
     box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
 }
 
+/* ==========================================================================
+   BOTÃO VOLTAR AO TOPO
+   ========================================================================== */
+.btn-topo {
+    position: fixed;
+    bottom: 97px;
+    right: 25px;
+    width: 46px;
+    height: 46px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-topo:hover {
+    background-color: #0052a3;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.5);
+}
+
+.btn-topo:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
+}
+
 /* RESPONSIVO PARA CELULAR */
 @media (max-width: 768px) {
     .hero h1 {
@@ -572,6 +608,7 @@ body.modal-open {
         visibility: hidden;
         pointer-events: none;
         overflow-y: auto;
+        overscroll-behavior: contain;
         transition: transform 0.3s ease, visibility 0.3s ease;
     }
 
@@ -590,7 +627,7 @@ body.modal-open {
     }
 
     .nav-menu a:hover,
-    .nav-menu a:focus {
+    .nav-menu a:focus-visible {
         color: #7eb8ff;
     }
 
@@ -602,7 +639,8 @@ body.modal-open {
         color: #ffffff !important;
     }
 
-    body.nav-open .whatsapp-float {
+    body.nav-open .whatsapp-float,
+    body.nav-open .btn-topo {
         visibility: hidden;
         pointer-events: none;
     }
@@ -634,10 +672,14 @@ html.no-js .nav-menu {
     position: static;
     transform: none;
     width: auto;
+    height: auto;
     padding: 0;
     background: none;
     box-shadow: none;
     border: none;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: auto;
 }
 
 /* ==========================================================================
@@ -652,6 +694,7 @@ section {
     font-size: 2rem;
     margin-bottom: 10px;
     color: var(--white);
+    text-wrap: balance;
 }
 
 .section-subtitle {
@@ -691,6 +734,7 @@ section {
     font-size: 1.25rem;
     margin-bottom: 10px;
     color: var(--white);
+    text-wrap: balance;
 }
 
 .card-servico p {
@@ -781,7 +825,7 @@ section {
     pointer-events: none;
 }
 
-.item-info h4 {
+.item-info h3 {
     font-size: 1rem;
 }
 
@@ -827,7 +871,7 @@ a.info-card:hover {
     color: var(--primary-color);
 }
 
-.info-card h4 {
+.info-card h3 {
     color: var(--white);
     font-size: 1rem;
 }
@@ -889,6 +933,13 @@ a.info-card:hover {
 .form-group select:focus,
 .form-group textarea:focus {
     border-color: var(--primary-color);
+}
+
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 .form-group.is-invalid input,
@@ -1007,29 +1058,29 @@ section {
 .image-modal[hidden] {
     display: none;
 }
-   
-   .modal-content {
-       margin: auto;
-       display: block;
-       max-width: 90%;
-       max-height: 80vh;
-       object-fit: contain;
-       border-radius: 8px;
-       box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
-       animation: zoomIn 0.3s ease;
-   }
-   
-   .modal-caption {
-       margin: auto;
-       display: block;
-       width: 80%;
-       max-width: 700px;
-       text-align: center;
-       color: #ffffff;
-       padding: 15px 0;
-       font-size: 1.1rem;
-   }
-   
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+    animation: zoomIn 0.3s ease;
+}
+
+.modal-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ffffff;
+    padding: 15px 0;
+    font-size: 1.1rem;
+}
+
 .modal-close {
     position: absolute;
     top: 20px;
@@ -1044,15 +1095,15 @@ section {
     line-height: 1;
     padding: 0;
 }
-   
-   .modal-close:hover {
-       color: #25d366;
-   }
-   
-   @keyframes zoomIn {
-       from { transform: scale(0.8); opacity: 0; }
-       to { transform: scale(1); opacity: 1; }
-   }
+
+.modal-close:hover {
+    color: #25d366;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
 
 /* 1. REGRA GERAL (Fora do @media):
    Esconde a logo do menu por padrão no computador (desktop) */
