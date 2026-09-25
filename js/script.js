@@ -96,6 +96,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formContato');
     const formFeedback = document.getElementById('formFeedback');
     const CONTACT_EMAIL = decodeContact('OwAkABMAHgAGAA8AAwAUAAoAFgBGAFwAXQBZADMAYwACAB0ADgBPAA4AJgA=');
+    const formFields = form ? [...form.querySelectorAll('input, select, textarea')] : [];
+    const NAME_PATTERN = /^[\p{L}\p{M}]+(?:\s[\p{L}\p{M}]+)*$/u;
+    const PHONE_PATTERN = /^\d+$/;
+
+    const sanitizeField = (field) => {
+        if (field.id === 'nome') {
+            field.value = field.value.replace(/[^\p{L}\p{M} ]/gu, '');
+        } else if (field.id === 'telefone') {
+            field.value = field.value.replace(/\D/g, '').slice(0, 15);
+        }
+    };
+
+    const restrictFieldInput = (field) => {
+        const invalidInputPattern = field.id === 'nome'
+            ? /[^\p{L}\p{M} ]/u
+            : field.id === 'telefone'
+                ? /\D/u
+                : null;
+
+        if (!invalidInputPattern) return;
+
+        field.addEventListener('beforeinput', (event) => {
+            if (event.data && invalidInputPattern.test(event.data)) {
+                event.preventDefault();
+            }
+        });
+    };
 
     const abrirExterno = (url) => {
         const link = document.createElement('a');
@@ -116,14 +143,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const limparErros = () => {
-        form.querySelectorAll('.form-group.is-invalid').forEach((group) => {
-            group.classList.remove('is-invalid');
-        });
+    const getFieldError = (field) => document.getElementById(`${field.id}-error`);
+
+    const clearFieldError = (field) => {
+        field.setAttribute('aria-invalid', 'false');
+        field.closest('.form-group')?.classList.remove('is-invalid');
+        const error = getFieldError(field);
+        if (error) error.textContent = '';
     };
 
-    const marcarErro = (field) => {
+    const setFieldError = (field, message) => {
+        field.setAttribute('aria-invalid', 'true');
         field.closest('.form-group')?.classList.add('is-invalid');
+        const error = getFieldError(field);
+        if (error) error.textContent = message;
+    };
+
+    const validateField = (field) => {
+        const value = field.value.trim();
+        let message = '';
+
+        if (!value) {
+            message = {
+                nome: 'Informe o seu nome.',
+                telefone: 'Informe o telefone ou WhatsApp.',
+                servico: 'Selecione o serviço desejado.',
+                mensagem: 'Descreva brevemente o serviço necessário.',
+            }[field.id] || 'Preencha este campo.';
+        } else if (field.id === 'nome' && !NAME_PATTERN.test(value)) {
+            message = 'Informe um nome com apenas letras e espaços.';
+        } else if (field.id === 'telefone') {
+            if (!PHONE_PATTERN.test(value)) {
+                message = 'Informe somente números no telefone.';
+            } else if (value.length < 10 || value.length > 15) {
+                message = 'Informe um telefone com 10 a 15 dígitos.';
+            }
+        } else if (field.id === 'mensagem' && value.length < 10) {
+            message = 'Descreva o serviço com pelo menos 10 caracteres.';
+        }
+
+        if (message) {
+            setFieldError(field, message);
+            return false;
+        }
+
+        clearFieldError(field);
+        return true;
+    };
+
+    const clearFeedbackIfValid = () => {
+        const hasErrors = formFields.some((field) => field.getAttribute('aria-invalid') === 'true');
+        if (!hasErrors && formFeedback?.classList.contains('is-error')) {
+            setFeedback('');
+        }
     };
 
     const montarTexto = (nome, telefone, servicoLabel, mensagem) => [
@@ -137,44 +209,42 @@ document.addEventListener('DOMContentLoaded', () => {
     ].join('\n');
 
     if (form) {
+        formFields.forEach((field) => {
+            restrictFieldInput(field);
+            field.addEventListener('input', () => {
+                sanitizeField(field);
+                if (field.getAttribute('aria-invalid') === 'true') {
+                    validateField(field);
+                }
+                if (formFeedback?.classList.contains('is-ok')) {
+                    setFeedback('');
+                }
+                clearFeedbackIfValid();
+            });
+
+            field.addEventListener('blur', () => {
+                validateField(field);
+                clearFeedbackIfValid();
+            });
+        });
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            limparErros();
+            formFields.forEach(sanitizeField);
+            formFields.forEach(clearFieldError);
+
+            const invalidFields = formFields.filter((field) => !validateField(field));
+            if (invalidFields.length) {
+                setFeedback('Verifique os campos destacados antes de continuar.', 'is-error');
+                invalidFields[0].focus();
+                return;
+            }
 
             const nome = form.nome.value.trim();
             const telefone = form.telefone.value.trim();
             const servicoSelect = form.servico;
             const mensagem = form.mensagem.value.trim();
             const canal = e.submitter?.getAttribute('data-canal') || 'whatsapp';
-
-            if (!nome) {
-                marcarErro(form.nome);
-                setFeedback('Informe o seu nome.', 'is-error');
-                form.nome.focus();
-                return;
-            }
-
-            if (!telefone) {
-                marcarErro(form.telefone);
-                setFeedback('Informe o telefone ou WhatsApp.', 'is-error');
-                form.telefone.focus();
-                return;
-            }
-
-            if (!servicoSelect.value) {
-                marcarErro(servicoSelect);
-                setFeedback('Selecione o serviço desejado.', 'is-error');
-                servicoSelect.focus();
-                return;
-            }
-
-            if (!mensagem) {
-                marcarErro(form.mensagem);
-                setFeedback('Descreva brevemente o serviço necessário.', 'is-error');
-                form.mensagem.focus();
-                return;
-            }
-
             const servicoLabel = servicoSelect.options[servicoSelect.selectedIndex].text;
             const texto = montarTexto(nome, telefone, servicoLabel, mensagem);
 
@@ -190,16 +260,19 @@ document.addEventListener('DOMContentLoaded', () => {
             abrirExterno(url);
             setFeedback('Abrindo o WhatsApp com a sua solicitação.', 'is-ok');
         });
-
-        form.querySelectorAll('input, select, textarea').forEach((field) => {
-            field.addEventListener('input', () => {
-                field.closest('.form-group')?.classList.remove('is-invalid');
-                if (formFeedback?.classList.contains('is-error')) {
-                    setFeedback('');
-                }
-            });
-        });
     }
+
+    const galleryImages = document.querySelectorAll('.item-galeria img[data-source]');
+    galleryImages.forEach((img) => {
+        const fallback = img.dataset.source;
+        const restoreSource = () => {
+            if (fallback && img.getAttribute('src') !== fallback) {
+                img.setAttribute('src', fallback);
+            }
+        };
+        img.addEventListener('error', restoreSource, { once: true });
+        if (img.complete && img.naturalWidth === 0) restoreSource();
+    });
 
     // === MODAL DE IMAGENS ===
     const modal = document.getElementById('image-modal');
@@ -213,7 +286,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal || !modalImg || !captionText) return;
         lastFocused = opener instanceof HTMLElement ? opener : document.activeElement;
         modal.hidden = false;
-        modalImg.src = img.src;
+        const fallback = img.dataset.source;
+        modalImg.onerror = () => {
+            if (fallback && modalImg.getAttribute('src') !== fallback) {
+                modalImg.src = fallback;
+            }
+        };
+        modalImg.src = img.dataset.full || img.src;
         modalImg.alt = img.alt || 'Imagem ampliada do portfólio';
         captionText.textContent = img.alt || '';
         document.body.classList.add('modal-open');
@@ -223,6 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = () => {
         if (!modal) return;
         modal.hidden = true;
+        modalImg.onerror = null;
         modalImg.src = '';
         document.body.classList.remove('modal-open');
         if (lastFocused && document.contains(lastFocused)) {

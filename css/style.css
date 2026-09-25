@@ -897,6 +897,16 @@ a.info-card:hover {
     border-color: #e57373;
 }
 
+.form-group .field-error {
+    margin: 5px 0 0;
+    color: #ff8a80;
+    font-size: 0.8rem;
+}
+
+.form-group .field-error:empty {
+    display: none;
+}
+
 .form-feedback {
     min-height: 1.2em;
     margin: 0;
