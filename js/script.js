@@ -1,6 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.classList.remove('no-js');
 
+    // Deixa o resto da pagina inerte enquanto um sobreposicao (drawer ou modal)
+    // estiver aberta: impede Tab/clique no conteudo de tras.
+    const setSiblingsInert = (keep, isInert) => {
+        document.body.childNodes.forEach((node) => {
+            if (node.nodeType !== Node.ELEMENT_NODE) return;
+            if (keep.includes(node)) return;
+            node.inert = isInert;
+        });
+    };
+
+    const FOCUSABLE_SELECTOR =
+        'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    const getFocusableWithin = (root) => {
+        if (!root) return [];
+        return [...root.querySelectorAll(FOCUSABLE_SELECTOR)].filter(
+            (el) => !el.disabled && !el.closest('[hidden]')
+        );
+    };
+
+    // Prende o Tab entre o primeiro e o ultimo elemento focavel do container.
+    const trapFocus = (root, event) => {
+        if (event.key !== 'Tab') return;
+        const focusables = getFocusableWithin(root);
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    };
+
     const KEY = 'XMarcalTec2026';
     const decodeContact = (b64) => {
         const bin = atob(b64);
@@ -22,14 +58,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navOverlay = document.getElementById('nav-overlay');
+    const header = document.querySelector('.header');
     const MOBILE_NAV_MAX = 768;
 
-    const closeNavMenu = () => {
+    const setDrawerInert = (isInert) => {
+        setSiblingsInert([header, navOverlay].filter(Boolean), isInert);
+    };
+
+    const closeNavMenu = (options = {}) => {
         if (!navMenu || !navToggle) return;
+        const wasOpen = navMenu.classList.contains('open');
         navMenu.classList.remove('open');
         navToggle.setAttribute('aria-expanded', 'false');
         navToggle.setAttribute('aria-label', 'Abrir menu');
         document.body.classList.remove('nav-open');
+        setDrawerInert(false);
+        if (wasOpen && options.restoreFocus !== false) {
+            navToggle.focus();
+        }
     };
 
     const openNavMenu = () => {
@@ -38,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.setAttribute('aria-expanded', 'true');
         navToggle.setAttribute('aria-label', 'Fechar menu');
         document.body.classList.add('nav-open');
+        setDrawerInert(true);
         navMenu.querySelector('a')?.focus();
     };
 
@@ -51,26 +98,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        navOverlay?.addEventListener('click', closeNavMenu);
+        navOverlay?.addEventListener('click', () => closeNavMenu());
 
         navMenu.querySelectorAll('a').forEach((link) => {
             link.addEventListener('click', () => {
-                closeNavMenu();
+                closeNavMenu({ restoreFocus: false });
                 const target = link.hash ? document.querySelector(link.hash) : null;
                 target?.focus({ preventScroll: true });
             });
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+            if (!navMenu.classList.contains('open')) return;
+            if (e.key === 'Escape') {
                 closeNavMenu();
-                navToggle.focus();
+                return;
+            }
+            // O toggle fica fora do drawer, entao o foco pode alternar entre ele e os links.
+            if (e.key !== 'Tab') return;
+            const focusables = [navToggle, ...getFocusableWithin(navMenu)];
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
             }
         });
 
         window.matchMedia(`(min-width: ${MOBILE_NAV_MAX + 1}px)`).addEventListener('change', (event) => {
             if (event.matches) {
-                closeNavMenu();
+                closeNavMenu({ restoreFocus: false });
             }
         });
     }
@@ -95,6 +155,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // === FILTRO DA GALERIA ===
     const filterButtons = document.querySelectorAll('.btn-filtro');
     const galleryItems = document.querySelectorAll('.item-galeria');
+    const galeriaStatus = document.getElementById('galeria-status');
+
+    const announceGallery = (visiveis, rotulo) => {
+        if (!galeriaStatus) return;
+        const total = galleryItems.length;
+        const itemLabel = total === 1 ? 'imagem' : 'imagens';
+        galeriaStatus.textContent = `Exibindo ${visiveis} de ${total} ${itemLabel} — ${rotulo}`;
+    };
+
+    const applyFilter = (filterValue, rotulo) => {
+        let visiveis = 0;
+        galleryItems.forEach((item) => {
+            const show = filterValue === 'todos' || item.classList.contains(filterValue);
+            item.style.display = show ? 'block' : 'none';
+            if (show) visiveis += 1;
+        });
+        announceGallery(visiveis, rotulo);
+    };
+
+    announceGallery(galleryItems.length, 'Todas as áreas');
 
     filterButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -105,12 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
             button.setAttribute('aria-pressed', 'true');
 
-            const filterValue = button.getAttribute('data-filter');
-
-            galleryItems.forEach((item) => {
-                const show = filterValue === 'todos' || item.classList.contains(filterValue);
-                item.style.display = show ? 'block' : 'none';
-            });
+            applyFilter(button.getAttribute('data-filter'), button.textContent.replace(/\s+/g, ' ').trim());
         });
     });
 
@@ -290,9 +365,11 @@ document.addEventListener('DOMContentLoaded', () => {
     galleryImages.forEach((img) => {
         const fallback = img.dataset.source;
         const restoreSource = () => {
-            if (fallback && img.getAttribute('src') !== fallback) {
-                img.setAttribute('src', fallback);
-            }
+            if (!fallback || img.getAttribute('src') === fallback) return;
+            // srcset tem prioridade sobre src: sem remover, o fallback nunca seria usado.
+            img.removeAttribute('srcset');
+            img.removeAttribute('sizes');
+            img.setAttribute('src', fallback);
         };
         img.addEventListener('error', restoreSource, { once: true });
         if (img.complete && img.naturalWidth === 0) restoreSource();
@@ -308,11 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const FALLBACK_LABEL = 'Imagem ampliada do portfólio';
 
-    const setBackgroundInert = (isInert) => {
-        document.body.childNodes.forEach((node) => {
-            if (node === modal || node.nodeType !== Node.ELEMENT_NODE) return;
-            node.inert = isInert;
-        });
+    const setModalInert = (isInert) => {
+        setSiblingsInert([modal].filter(Boolean), isInert);
     };
 
     const openModal = (img, opener) => {
@@ -336,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.alt = label;
         captionText.textContent = label;
         document.body.classList.add('modal-open');
-        setBackgroundInert(true);
+        setModalInert(true);
         closeBtn?.focus();
     };
 
@@ -347,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.onload = null;
         modalImg.removeAttribute('src');
         document.body.classList.remove('modal-open');
-        setBackgroundInert(false);
+        setModalInert(false);
         if (lastFocused && document.contains(lastFocused)) {
             lastFocused.focus();
         }
@@ -360,29 +434,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const FOCUSABLE_SELECTOR =
-        'button:not([disabled]), [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])';
-
-    const getModalFocusable = () => {
-        if (!modal) return [];
-        return [...modal.querySelectorAll(FOCUSABLE_SELECTOR)].filter(
-            (el) => !el.disabled && !el.closest('[hidden]')
-        );
-    };
-
     modal?.addEventListener('keydown', (e) => {
-        if (e.key !== 'Tab' || modal.hidden) return;
-        const focusables = getModalFocusable();
-        if (focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-        }
+        if (modal.hidden) return;
+        trapFocus(modal, e);
     });
 
     closeBtn?.addEventListener('click', closeModal);

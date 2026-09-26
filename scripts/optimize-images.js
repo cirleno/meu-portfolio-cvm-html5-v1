@@ -8,6 +8,7 @@ const imageRoot = path.join(projectRoot, 'img');
 const generatedRoot = path.join(imageRoot, 'generated');
 const supportedExtensions = new Set(['.avif', '.jpeg', '.jpg', '.png', '.webp']);
 const variants = [
+  { directory: 'cards', width: 400 },
   { directory: 'thumbs', width: 800 },
   { directory: 'full', width: 1600 },
 ];

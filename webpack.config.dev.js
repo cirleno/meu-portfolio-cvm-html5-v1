@@ -9,6 +9,8 @@ module.exports = merge(common, {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
+      // O script vem do proprio template (js/script.js). Nao injetar evita
+      // carregar o bundle duas vezes; o dev-server serve o path da memoria.
       inject: false,
     }),
   ],

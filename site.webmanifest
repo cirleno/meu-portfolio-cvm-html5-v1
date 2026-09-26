@@ -1,13 +1,41 @@
 {
   "short_name": "X-Marçal",
   "name": "X-Marçal Técnico — Portfólio de Serviços",
-  "icons": [{
-    "src": "icon.png",
-    "type": "image/png",
-    "sizes": "192x192"
-  }],
+  "description": "Técnico em Eletrônica, CFTV/IP, Elétrica, Hidráulica e Manutenção em Curitiba, Campo Largo e região.",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "dir": "ltr",
+  "lang": "pt-BR",
+  "categories": ["business", "utilities"],
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
+    }
+  ],
   "background_color": "#121824",
-  "theme_color": "#121824",
-  "lang": "pt-BR"
+  "theme_color": "#121824"
 }

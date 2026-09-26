@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src https://www.google.com; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 
     <!-- SEO Básico -->
     <title>X-Marçal - Técnico em Eletrônica, CFTV, Elétrica e Manutenção</title>
     <meta name="description" content="Técnico em Eletrônica, CFTV/IP, Elétrica, Hidráulica e Manutenção em Curitiba, Campo Largo e região. Solicite orçamento pelo WhatsApp.">
     <meta name="keywords" content="Técnico em Eletrônica, CFTV IP, Elétrica Residencial, Manutenção Hidráulica, Campo Largo, Curitiba, X-Marçal">
     <meta name="author" content="X-Marçal Técnico">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://xmarcaltecnico.github.io/">
 
     <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
@@ -35,27 +35,65 @@
     <meta name="twitter:title" content="X-Marçal Técnico — Soluções Técnicas com Precisão">
     <meta name="twitter:description" content="Técnico em Eletrônica, CFTV/IP, Elétrica, Hidráulica e Manutenção em Curitiba, Campo Largo e região.">
     <meta name="twitter:image" content="https://xmarcaltecnico.github.io/img/og-image.jpg">
+    <meta name="twitter:image:alt" content="Portfólio de serviços do técnico X-Marçal — instalações elétricas, CFTV/IP e acabamentos">
 
-    <!-- Estilos e Fontes -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Estilos locais: nenhuma CDN, nenhuma fonte externa (CSP mais restritiva possivel).
+         Os icones sao SVG inline (Font Awesome Free 6.4.0: codigo MIT, icones CC BY 4.0),
+         evitando 3 requisicoes externas e o bloqueio de render do CSS de terceiros. -->
     <link rel="stylesheet" href="css/style.css">
 
     <!-- Favicon e Ícones -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" sizes="any">
-    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=3" sizes="32x32">
+    <link rel="icon" type="image/png" href="icon.png?v=3" sizes="192x192">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
     <link rel="manifest" href="site.webmanifest">
+    <meta name="msapplication-config" content="browserconfig.xml">
     <meta name="theme-color" content="#121824">
 
     <!-- Dados Estruturados (Schema.org / LocalBusiness) -->
+    <!-- `telephone` e `contactPoint` ficam de fora de proposito: o contato e ofuscado por
+         decisao do dono (ver AGENTS.md). Adicione "telephone" aqui se o SEO local pesar
+         mais que a ofuscacao. `openingHours` tambem: nao ha dado confirmado. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+      "@id": "https://xmarcaltecnico.github.io/#negocio",
+      "url": "https://xmarcaltecnico.github.io/",
       "name": "X-Marçal Técnico",
       "description": "Técnico em Eletrônica, CFTV/IP, Elétrica, Hidráulica e Manutenção Residencial e Comercial.",
-      "areaServed": ["Curitiba", "Campo Largo", "Região Metropolitana de Curitiba"],
-      "image": "https://xmarcaltecnico.github.io/img/logo.png"
+      "image": [
+        "https://xmarcaltecnico.github.io/img/og-image.jpg",
+        "https://xmarcaltecnico.github.io/img/logo.png"
+      ],
+      "logo": "https://xmarcaltecnico.github.io/img/logo.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Curitiba",
+        "addressRegion": "PR",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -25.4526678,
+        "longitude": -49.5786851
+      },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Curitiba" },
+        { "@type": "AdministrativeArea", "name": "Campo Largo" },
+        { "@type": "AdministrativeArea", "name": "Região Metropolitana de Curitiba" }
+      ],
+      "priceRange": "$$",
+      "availableLanguage": "pt-BR",
+      "currenciesAccepted": "BRL",
+      "knowsAbout": [
+        "Eletrônica",
+        "CFTV/IP",
+        "Elétrica",
+        "Hidráulica",
+        "Carpintaria",
+        "Manutenção residencial e comercial"
+      ]
     }
     </script>
 </head>
@@ -64,16 +102,23 @@
 
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
+<!-- Aviso visivel apenas enquanto o JavaScript nao rodou (html.no-js).
+     O script abaixo remove a classe no-js ao iniciar, entao este bloco
+     desaparece. Se voce esta vendo esta faixa, o navegador esta com
+     JavaScript bloqueado (ou opened com outra extensao). -->
+<p class="js-aviso" role="status">Ative o JavaScript para usar o menu, a galeria ampliada e o
+    contato.</p>
+
 <!-- CABEÇALHO / NAVEGAÇÃO -->
 <header class="header">
     <div class="container nav-container">
         <a href="#home" class="logo">
             <img src="img/logo.png" alt="X-Marçal Técnico" class="logo-img" width="58" height="58" fetchpriority="high">
         </a>
-        <button type="button" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
-            <i class="fas fa-bars nav-toggle-icon nav-toggle-bars" aria-hidden="true"></i>
-            <i class="fas fa-xmark nav-toggle-icon nav-toggle-close" aria-hidden="true"></i>
-        </button>
+            <button type="button" class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+                <svg class="icon nav-toggle-icon nav-toggle-bars" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+                <svg class="icon nav-toggle-icon nav-toggle-close" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+            </button>
         <nav class="nav-menu" id="nav-menu" aria-label="Menu principal">
             <a href="#home">Início</a>
             <a href="#sobre">Sobre</a>
@@ -99,7 +144,7 @@
             <p>Técnico em Eletrônica, Instalação de CFTV/IP, Elétrica, Hidráulica e Manutenções em Geral.</p>
             <div class="hero-buttons">
                 <a data-contact="MAA5ABUAAgAQAFsAQwB7ABIAAgAcAF0AVwAZAG0AeABVAEMAWgBYAF4AbABUAFoACgABAAIA" target="_blank" rel="noopener noreferrer" class="btn btn-primary" tabindex="0">
-                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Solicitar Orçamento
+                    <svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> Solicitar Orçamento
                 </a>
                 <a href="#galeria" class="btn btn-secondary">Ver Trabalhos</a>
             </div>
@@ -110,7 +155,7 @@
     <section class="sobre" id="sobre" tabindex="-1">
         <div class="container">
             <h2>Sobre o Profissional</h2>
-            <p>Atendimento autônomo focado na resolução eficiente de problemas técnicos residenciais. Experiência
+            <p>Atendimento autônomo focado na resolução eficiente de problemas técnicos residenciais ou comerciais. Experiência
                 consolidada em infraestrutura elétrica, segurança eletrônica e reparos residenciais ou comerciais.</p>
         </div>
     </section>
@@ -121,22 +166,22 @@
             <h2 class="section-title">Especialidades</h2>
             <div class="servicos-grid">
                 <div class="card-servico">
-                    <i class="fas fa-microchip" aria-hidden="true"></i>
+                    <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M176 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64c-35.3 0-64 28.7-64 64H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64c0 35.3 28.7 64 64 64v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448c35.3 0 64-28.7 64-64h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V280h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V176h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H280V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H176V24zM160 128H352c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm192 32H160V352H352V160z"/></svg>
                     <h3>Eletrônica Avançada e Tecnologia da Informação</h3>
-                    <p>Manutenção e reparo de placas, equipamentos eletrônicos e componentes de precisão.</p>
+                    <p>Instalação & Manutenção de equipamentos eletrônicos, computadores em geral.</p>
                 </div>
                 <div class="card-servico">
-                    <i class="fas fa-video" aria-hidden="true"></i>
+                    <svg class="icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2V384c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1V320 192 174.9l14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"/></svg>
                     <h3>CFTV/IP Segurança para Monitoração patrimonial</h3>
                     <p>Instalação, configuração de câmeras IP, DVRs, cabeamento estruturado e acesso remoto.</p>
                 </div>
                 <div class="card-servico">
-                    <i class="fas fa-bolt" aria-hidden="true"></i>
+                    <svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"/></svg>
                     <h3>Elétrica & Hidráulica</h3>
-                    <p>Instalações elétricas residenciais/comerciais, quadros de distribuição e reparos hidráulicos.</p>
+                    <p>Instalações elétricas residenciais/comerciais, iluminação LED,  quadros de distribuição e reparos hidráulicos.</p>
                 </div>
                 <div class="card-servico">
-                    <i class="fas fa-hammer" aria-hidden="true"></i>
+                    <svg class="icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M413.5 237.5c-28.2 4.8-58.2-3.6-80-25.4l-38.1-38.1C280.4 159 272 138.8 272 117.6V105.5L192.3 62c-5.3-2.9-8.6-8.6-8.3-14.7s3.9-11.5 9.5-14l47.2-21C259.1 4.2 279 0 299.2 0h18.1c36.7 0 72 14 98.7 39.1l44.6 42c24.2 22.8 33.2 55.7 26.6 86L503 183l8-8c9.4-9.4 24.6-9.4 33.9 0l24 24c9.4 9.4 9.4 24.6 0 33.9l-88 88c-9.4 9.4-24.6 9.4-33.9 0l-24-24c-9.4-9.4-9.4-24.6 0-33.9l8-8-17.5-17.5zM27.4 377.1L260.9 182.6c3.5 4.9 7.5 9.6 11.8 14l38.1 38.1c6 6 12.4 11.2 19.2 15.7L134.9 484.6c-14.5 17.4-36 27.4-58.6 27.4C34.1 512 0 477.8 0 435.7c0-22.6 10.1-44.1 27.4-58.6z"/></svg>
                     <h3>Construção & Marcenaria</h3>
                     <p>Serviços de construção civil, pequenos serviços de reparos e reformas, carpintaria e acabamentos.
                     </p>
@@ -152,23 +197,25 @@
             <p class="section-subtitle">Filtre por área para ver imagens de trabalhos executados</p>
 
             <!-- Botoes de Filtro -->
-            <div class="filtros-galeria">
-                <button type="button" class="btn-filtro active" data-filter="todos" aria-pressed="true">Todos</button>
+            <div class="filtros-galeria" role="group" aria-label="Filtrar portfólio por área">
+                <button type="button" class="btn-filtro active" data-filter="todos" aria-pressed="true" aria-controls="galeria-grid">Todos</button>
                 <button type="button" class="btn-filtro" data-filter="eletronica"
-                    aria-pressed="false">Eletrônica</button>
-                <button type="button" class="btn-filtro" data-filter="cftv" aria-pressed="false">CFTV/IP</button>
-                <button type="button" class="btn-filtro" data-filter="eletrica" aria-pressed="false">Elétrica &
-                    Hidráulica</button>
-                <button type="button" class="btn-filtro" data-filter="obras" aria-pressed="false">Construção &
-                    Marcenaria</button>
+                    aria-pressed="false" aria-controls="galeria-grid">Eletrônica</button>
+                <button type="button" class="btn-filtro" data-filter="cftv" aria-pressed="false"
+                    aria-controls="galeria-grid">CFTV/IP</button>
+                <button type="button" class="btn-filtro" data-filter="eletrica" aria-pressed="false"
+                    aria-controls="galeria-grid">Elétrica & Hidráulica</button>
+                <button type="button" class="btn-filtro" data-filter="obras" aria-pressed="false"
+                    aria-controls="galeria-grid">Construção & Marcenaria</button>
             </div>
+            <p class="filtros-status" id="galeria-status" role="status" aria-live="polite"></p>
 
             <!-- Grid de Fotos -->
-            <div class="galeria-grid">
+            <div class="galeria-grid" id="galeria-grid">
                 <!-- Exemplo de Item 1 (Eletronica) -->
                 <div class="item-galeria eletronica">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Controle Arcade">
-                        <img src="img/generated/thumbs/Eletronica/Imagem0166.webp" data-source="img/Eletronica/Imagem0166.webp" data-full="img/generated/full/Eletronica/Imagem0166.webp" alt="Controle Arcade" loading="lazy" width="1152" height="864">
+                        <img src="img/generated/thumbs/Eletronica/Imagem0166.webp" srcset="img/generated/cards/Eletronica/Imagem0166.webp 400w, img/generated/thumbs/Eletronica/Imagem0166.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Eletronica/Imagem0166.webp" data-full="img/generated/full/Eletronica/Imagem0166.webp" alt="Controle Arcade" loading="lazy" width="1152" height="864">
                     </button>
                     <div class="item-info">
                         <h3>Construção & Montagem</h3>
@@ -179,7 +226,7 @@
                 <!-- Exemplo de Item 1.2 (Eletronica) -->
                 <div class="item-galeria eletronica">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Bartop">
-                        <img src="img/generated/thumbs/Eletronica/IMG_20200501_133817cwb.webp" data-source="img/Eletronica/IMG_20200501_133817cwb.webp" data-full="img/generated/full/Eletronica/IMG_20200501_133817cwb.webp" alt="Bartop" loading="lazy" width="2317" height="3387">
+                        <img src="img/generated/thumbs/Eletronica/IMG_20200501_133817cwb.webp" srcset="img/generated/cards/Eletronica/IMG_20200501_133817cwb.webp 400w, img/generated/thumbs/Eletronica/IMG_20200501_133817cwb.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Eletronica/IMG_20200501_133817cwb.webp" data-full="img/generated/full/Eletronica/IMG_20200501_133817cwb.webp" alt="Bartop" loading="lazy" width="2317" height="3387">
                     </button>
                     <div class="item-info">
                         <h3>Construção & Montagem, configuração</h3>
@@ -190,7 +237,7 @@
                 <!-- Exemplo de Item 1.3 (Eletronica) -->
                 <div class="item-galeria eletronica">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Montagem de cabeçote e caixa passiva">
-                        <img src="img/generated/thumbs/Eletronica/IMG_20190406_174044.webp" data-source="img/Eletronica/IMG_20190406_174044.webp" data-full="img/generated/full/Eletronica/IMG_20190406_174044.webp" alt="Montagem de cabeçote e caixa passiva" loading="lazy" width="1200" height="961">
+                        <img src="img/generated/thumbs/Eletronica/IMG_20190406_174044.webp" srcset="img/generated/cards/Eletronica/IMG_20190406_174044.webp 400w, img/generated/thumbs/Eletronica/IMG_20190406_174044.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Eletronica/IMG_20190406_174044.webp" data-full="img/generated/full/Eletronica/IMG_20190406_174044.webp" alt="Montagem de cabeçote e caixa passiva" loading="lazy" width="1200" height="961">
                     </button>
                     <div class="item-info">
                         <h3>Construção & Montagem</h3>
@@ -201,7 +248,7 @@
                 <!-- Exemplo de Item 2 (CFTV) -->
                 <div class="item-galeria cftv">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Instalação CFTV">
-                        <img src="img/generated/thumbs/Peabiru/IMG_20220630_164121.webp" data-source="img/Peabiru/IMG_20220630_164121.webp" data-full="img/generated/full/Peabiru/IMG_20220630_164121.webp" alt="Instalação CFTV" loading="lazy" width="1195" height="896">
+                        <img src="img/generated/thumbs/Peabiru/IMG_20220630_164121.webp" srcset="img/generated/cards/Peabiru/IMG_20220630_164121.webp 400w, img/generated/thumbs/Peabiru/IMG_20220630_164121.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Peabiru/IMG_20220630_164121.webp" data-full="img/generated/full/Peabiru/IMG_20220630_164121.webp" alt="Instalação CFTV" loading="lazy" width="1195" height="896">
                     </button>
                     <div class="item-info">
                         <h3>Instalação CFTV/IP</h3>
@@ -212,7 +259,7 @@
                 <!-- Exemplo de Item 2.1 (CFTV) -->
                 <div class="item-galeria cftv">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Instalação CFTV">
-                        <img src="img/generated/thumbs/Peabiru/IMG_20220603_134316.webp" data-source="img/Peabiru/IMG_20220603_134316.webp" data-full="img/generated/full/Peabiru/IMG_20220603_134316.webp" alt="Instalação CFTV" loading="lazy" width="1200" height="827">
+                        <img src="img/generated/thumbs/Peabiru/IMG_20220603_134316.webp" srcset="img/generated/cards/Peabiru/IMG_20220603_134316.webp 400w, img/generated/thumbs/Peabiru/IMG_20220603_134316.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Peabiru/IMG_20220603_134316.webp" data-full="img/generated/full/Peabiru/IMG_20220603_134316.webp" alt="Instalação CFTV" loading="lazy" width="1200" height="827">
                     </button>
                     <div class="item-info">
                         <h3>Instalação de Câmeras IP</h3>
@@ -223,7 +270,7 @@
                 <!-- Exemplo de Item 2.2 (CFTV) -->
                 <div class="item-galeria cftv">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Instalação CFTV">
-                        <img src="img/generated/thumbs/Peabiru/IMG_20220629_201837.webp" data-source="img/Peabiru/IMG_20220629_201837.webp" data-full="img/generated/full/Peabiru/IMG_20220629_201837.webp" alt="Instalação CFTV" loading="lazy" width="1200" height="675">
+                        <img src="img/generated/thumbs/Peabiru/IMG_20220629_201837.webp" srcset="img/generated/cards/Peabiru/IMG_20220629_201837.webp 400w, img/generated/thumbs/Peabiru/IMG_20220629_201837.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Peabiru/IMG_20220629_201837.webp" data-full="img/generated/full/Peabiru/IMG_20220629_201837.webp" alt="Instalação CFTV" loading="lazy" width="1200" height="675">
                     </button>
                     <div class="item-info">
                         <h3>Instalação CFTV/IP</h3>
@@ -234,7 +281,7 @@
                 <!-- Exemplo de Item 2.3 (CFTV) -->
                 <div class="item-galeria cftv">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Instalação CFTV">
-                        <img src="img/generated/thumbs/Peabiru/IMG_20220601_144236.webp" data-source="img/Peabiru/IMG_20220601_144236.webp" data-full="img/generated/full/Peabiru/IMG_20220601_144236.webp" alt="Instalação CFTV" loading="lazy" width="1200" height="643">
+                        <img src="img/generated/thumbs/Peabiru/IMG_20220601_144236.webp" srcset="img/generated/cards/Peabiru/IMG_20220601_144236.webp 400w, img/generated/thumbs/Peabiru/IMG_20220601_144236.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Peabiru/IMG_20220601_144236.webp" data-full="img/generated/full/Peabiru/IMG_20220601_144236.webp" alt="Instalação CFTV" loading="lazy" width="1200" height="643">
                     </button>
                     <div class="item-info">
                         <h3>Instalação de Câmeras IP</h3>
@@ -245,7 +292,7 @@
                 <!-- Exemplo de Item 3 (Eletrica) -->
                 <div class="item-galeria eletrica">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Quadro Elétrico">
-                        <img src="img/generated/thumbs/Curitiba/IMG_20260117_105743qdcaT.webp" data-source="img/Curitiba/IMG_20260117_105743qdcaT.webp" data-full="img/generated/full/Curitiba/IMG_20260117_105743qdcaT.webp" alt="Quadro Elétrico" loading="lazy" width="681" height="1200">
+                        <img src="img/generated/thumbs/Curitiba/IMG_20260117_105743qdcaT.webp" srcset="img/generated/cards/Curitiba/IMG_20260117_105743qdcaT.webp 400w, img/generated/thumbs/Curitiba/IMG_20260117_105743qdcaT.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Curitiba/IMG_20260117_105743qdcaT.webp" data-full="img/generated/full/Curitiba/IMG_20260117_105743qdcaT.webp" alt="Quadro Elétrico" loading="lazy" width="681" height="1200">
                     </button>
                     <div class="item-info">
                         <h3>Montagem e manutenção de Quadros Elétricos</h3>
@@ -255,7 +302,7 @@
                 <!-- Exemplo de Item 3.1 (Eletrica) -->
                 <div class="item-galeria eletrica">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Alimentador Automatizado">
-                        <img src="img/generated/thumbs/Peabiru/IMG_20220716_123110.webp" data-source="img/Peabiru/IMG_20220716_123110.webp" data-full="img/generated/full/Peabiru/IMG_20220716_123110.webp" alt="Alimentador Automatizado" loading="lazy" width="1107" height="1200">
+                        <img src="img/generated/thumbs/Peabiru/IMG_20220716_123110.webp" srcset="img/generated/cards/Peabiru/IMG_20220716_123110.webp 400w, img/generated/thumbs/Peabiru/IMG_20220716_123110.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Peabiru/IMG_20220716_123110.webp" data-full="img/generated/full/Peabiru/IMG_20220716_123110.webp" alt="Alimentador Automatizado" loading="lazy" width="1107" height="1200">
                     </button>
                     <div class="item-info">
                         <h3>Montagem e Instalação</h3>
@@ -266,7 +313,7 @@
                 <!-- Exemplo de Item 4 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de Marcenaria & Acabamentos">
-                        <img src="img/generated/thumbs/Florianópolis/IMG_20250424_154810flps.webp" data-source="img/Florianópolis/IMG_20250424_154810flps.webp" data-full="img/generated/full/Florianópolis/IMG_20250424_154810flps.webp" alt="Serviço de Marcenaria & Acabamentos" loading="lazy" width="1200" height="900">
+                        <img src="img/generated/thumbs/Florianópolis/IMG_20250424_154810flps.webp" srcset="img/generated/cards/Florianópolis/IMG_20250424_154810flps.webp 400w, img/generated/thumbs/Florianópolis/IMG_20250424_154810flps.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Florianópolis/IMG_20250424_154810flps.webp" data-full="img/generated/full/Florianópolis/IMG_20250424_154810flps.webp" alt="Serviço de Marcenaria & Acabamentos" loading="lazy" width="1200" height="900">
                     </button>
                     <div class="item-info">
                         <h3>Repintura de Deck</h3>
@@ -276,7 +323,7 @@
                 <!-- Exemplo de Item 4.1 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de Marcenaria">
-                        <img src="img/generated/thumbs/Curitiba/IMG_20201208_185533.webp" data-source="img/Curitiba/IMG_20201208_185533.webp" data-full="img/generated/full/Curitiba/IMG_20201208_185533.webp" alt="Serviço de Marcenaria" loading="lazy" width="1200" height="900">
+                        <img src="img/generated/thumbs/Curitiba/IMG_20201208_185533.webp" srcset="img/generated/cards/Curitiba/IMG_20201208_185533.webp 400w, img/generated/thumbs/Curitiba/IMG_20201208_185533.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Curitiba/IMG_20201208_185533.webp" data-full="img/generated/full/Curitiba/IMG_20201208_185533.webp" alt="Serviço de Marcenaria" loading="lazy" width="1200" height="900">
                     </button>
                     <div class="item-info">
                         <h3>Instalação de revestimento feito em madeira para deck</h3>
@@ -287,7 +334,7 @@
                 <!-- Exemplo de Item 4.2 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de Marcenaria">
-                        <img src="img/generated/thumbs/Perth/IMG_5691.webp" data-source="img/Perth/IMG_5691.webp" data-full="img/generated/full/Perth/IMG_5691.webp" alt="Serviço de Marcenaria" loading="lazy" width="900" height="1200">
+                        <img src="img/generated/thumbs/Perth/IMG_5691.webp" srcset="img/generated/cards/Perth/IMG_5691.webp 400w, img/generated/thumbs/Perth/IMG_5691.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Perth/IMG_5691.webp" data-full="img/generated/full/Perth/IMG_5691.webp" alt="Serviço de Marcenaria" loading="lazy" width="900" height="1200">
                     </button>
                     <div class="item-info">
                         <h3>Reforma de Banheiro</h3>
@@ -298,7 +345,7 @@
                 <!-- Exemplo de Item 4.3 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de Acabamento">
-                        <img src="img/generated/thumbs/Curitiba/IMG_20260414_162916.webp" data-source="img/Curitiba/IMG_20260414_162916.webp" data-full="img/generated/full/Curitiba/IMG_20260414_162916.webp" alt="Serviço de Acabamento" loading="lazy" width="1200" height="900">
+                        <img src="img/generated/thumbs/Curitiba/IMG_20260414_162916.webp" srcset="img/generated/cards/Curitiba/IMG_20260414_162916.webp 400w, img/generated/thumbs/Curitiba/IMG_20260414_162916.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Curitiba/IMG_20260414_162916.webp" data-full="img/generated/full/Curitiba/IMG_20260414_162916.webp" alt="Serviço de Acabamento" loading="lazy" width="1200" height="900">
                     </button>
                     <div class="item-info">
                         <h3>Instalação de revestimento e LEDs</h3>
@@ -309,7 +356,7 @@
                 <!-- Exemplo de Item 4.3 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de Marcenaria">
-                        <img src="img/generated/thumbs/Curitiba/IMG_20260330_140956.webp" data-source="img/Curitiba/IMG_20260330_140956.webp" data-full="img/generated/full/Curitiba/IMG_20260330_140956.webp" alt="Serviço de Marcenaria" loading="lazy" width="900" height="1200">
+                        <img src="img/generated/thumbs/Curitiba/IMG_20260330_140956.webp" srcset="img/generated/cards/Curitiba/IMG_20260330_140956.webp 400w, img/generated/thumbs/Curitiba/IMG_20260330_140956.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Curitiba/IMG_20260330_140956.webp" data-full="img/generated/full/Curitiba/IMG_20260330_140956.webp" alt="Serviço de Marcenaria" loading="lazy" width="900" height="1200">
                     </button>
                     <div class="item-info">
                         <h3>Restauração e repintura da porta</h3>
@@ -320,7 +367,7 @@
                 <!-- Exemplo de Item 4.4 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de recolocação piso pré-moldado">
-                        <img src="img/generated/thumbs/Perth/IMG_4236.webp" data-source="img/Perth/IMG_4236.webp" data-full="img/generated/full/Perth/IMG_4236.webp" alt="Serviço de recolocação piso pré-moldado" loading="lazy" width="2448" height="3264">
+                        <img src="img/generated/thumbs/Perth/IMG_4236.webp" srcset="img/generated/cards/Perth/IMG_4236.webp 400w, img/generated/thumbs/Perth/IMG_4236.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Perth/IMG_4236.webp" data-full="img/generated/full/Perth/IMG_4236.webp" alt="Serviço de recolocação piso pré-moldado" loading="lazy" width="2448" height="3264">
                     </button>
                     <div class="item-info">
                         <h3>Serviço de recolocação piso pré-moldado</h3>
@@ -331,7 +378,7 @@
                 <!-- Exemplo de Item 4.5 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de readequação do piso e nivelamento">
-                        <img src="img/generated/thumbs/Perth/IMG_5399.webp" data-source="img/Perth/IMG_5399.webp" data-full="img/generated/full/Perth/IMG_5399.webp" alt="Serviço de readequação do piso e nivelamento" loading="lazy" width="3264" height="2448">
+                        <img src="img/generated/thumbs/Perth/IMG_5399.webp" srcset="img/generated/cards/Perth/IMG_5399.webp 400w, img/generated/thumbs/Perth/IMG_5399.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Perth/IMG_5399.webp" data-full="img/generated/full/Perth/IMG_5399.webp" alt="Serviço de readequação do piso e nivelamento" loading="lazy" width="3264" height="2448">
                     </button>
                     <div class="item-info">
                         <h3>Serviço de readequação do piso e nivelamento</h3>
@@ -342,7 +389,7 @@
                 <!-- Exemplo de Item 4.6 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de readequação Churrasqueira">
-                        <img src="img/generated/thumbs/Praia_de_Leste/IMG_20260725_144948pts.webp" data-source="img/Praia_de_Leste/IMG_20260725_144948pts.webp" data-full="img/generated/full/Praia_de_Leste/IMG_20260725_144948pts.webp" alt="Serviço de readequação Churrasqueira" loading="lazy" width="2607" height="2626">
+                        <img src="img/generated/thumbs/Praia_de_Leste/IMG_20260725_144948pts.webp" srcset="img/generated/cards/Praia_de_Leste/IMG_20260725_144948pts.webp 400w, img/generated/thumbs/Praia_de_Leste/IMG_20260725_144948pts.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Praia_de_Leste/IMG_20260725_144948pts.webp" data-full="img/generated/full/Praia_de_Leste/IMG_20260725_144948pts.webp" alt="Serviço de readequação Churrasqueira" loading="lazy" width="2607" height="2626">
                     </button>
                     <div class="item-info">
                         <h3>Serviço de remoção e reinstalação de tijolos laminados furados</h3>
@@ -353,7 +400,7 @@
                 <!-- Exemplo de Item 4.6 (Obras) -->
                 <div class="item-galeria obras">
                     <button type="button" class="item-galeria-btn" aria-label="Ampliar imagem: Serviço de repintura dos muros">
-                        <img src="img/generated/thumbs/Praia_de_Leste/IMG_20260725_145051pts.webp" data-source="img/Praia_de_Leste/IMG_20260725_145051pts.webp" data-full="img/generated/full/Praia_de_Leste/IMG_20260725_145051pts.webp" alt="Serviço de repintura dos muros" loading="lazy" width="4080" height="3060">
+                        <img src="img/generated/thumbs/Praia_de_Leste/IMG_20260725_145051pts.webp" srcset="img/generated/cards/Praia_de_Leste/IMG_20260725_145051pts.webp 400w, img/generated/thumbs/Praia_de_Leste/IMG_20260725_145051pts.webp 800w" sizes="(max-width: 768px) 100vw, 370px" decoding="async" data-source="img/Praia_de_Leste/IMG_20260725_145051pts.webp" data-full="img/generated/full/Praia_de_Leste/IMG_20260725_145051pts.webp" alt="Serviço de repintura dos muros" loading="lazy" width="4080" height="3060">
                     </button>
                     <div class="item-info">
                         <h3>Serviço de repinturas dos muros</h3>
@@ -375,19 +422,19 @@
                 <!-- Informações Rápidas -->
                 <div class="contato-info">
                     <a class="info-card" data-contact="MAA5ABUAAgAQAFsAQwB7ABIAAgAcAF0AVwAZAG0AeABVAEMAWgBYAF4AbABUAFoACgABAAIACQAsACgAGQAGAF4ALgAAAHEAJgBQABcAcQADABcAfQB/AFEANQAMABIAGAA1ABcACgBTABUAAAAGADwAKABEAEAAUwASAAMAOAAMAAAAWwBEAFMARAB9AH8AUQAHAA4ARABeAGQACgARABcAcwABABMAGQB6AAAAHwAGAA8AGAA7AEsA" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        <svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
                         <div>
                             <h3>WhatsApp</h3>
                         </div>
                     </a>
                     <a class="info-card" data-contact="NQAsAAgAHgAXAA4AVgA3AAwAEQBeAFUAXABZABgAIgAUAAYADwAOAAMAPwBLAAAAXQBdABwAVAAqAHIAEgAHAAEACwAJADcAEQBeAH0AQgAXAHUAawBoACAARQACAAwACQA6ABEADAAXAAIAAgATAB0AfwBEAEoAUwBEAFUAYABAAFEAAgBoAB8AewA5AD8ARAAxAFAARAAtAGMABAAPABcAAgACAGIAfQAOAFIAVwAiAFgADwA6AAwAAABdAA==" tabindex="0">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
                         <div>
                             <h3>E-mail</h3>
                         </div>
                     </a>
                     <div class="info-card">
-                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>
                         <div>
                             <h3>Atendimento</h3>
                             <p>Curitiba e Região Metropolitana</p>
@@ -441,11 +488,16 @@
                     <p class="form-feedback" id="formFeedback" role="status" aria-live="polite" aria-atomic="true"></p>
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary btn-block" data-canal="whatsapp">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i> Enviar via WhatsApp
+                            <svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> Enviar via WhatsApp
                         </button>
                         <button type="submit" class="btn btn-secondary btn-block" data-canal="email">
-                            <i class="fas fa-envelope" aria-hidden="true"></i> Enviar por e-mail
+                            <svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> Enviar por e-mail
                         </button>
+                        <noscript>
+                            <p class="form-noscript">O envio usa JavaScript para abrir o WhatsApp ou o seu
+                                aplicativo de e-mail com a mensagem já preenchida. Ative o JavaScript para usar
+                                este formulário.</p>
+                        </noscript>
                     </div>
                 </form>
             </div>
@@ -465,12 +517,12 @@
     <!-- BOTÃO FLUTUANTE WHATSAPP -->
     <a data-contact="MAA5ABUAAgAQAFsAQwB7ABIAAgAcAF0AVwAZAG0AeABVAEMAWgBYAF4AbABUAFoACgABAAIACQAsACgAGQAGAF4ALgAAAHEAJgBQABcAcQADABcAfQB/AFEANQAMABIAGAA1ABcACgBTABUAAAAGADwAKABEAEAAUwASAAMAOAAMAAAAWwBEAFMARAB9AH8AUQAHAA4ARABeAGQACgARABcAcwABABMAGQB6AAAAHwAGAA8AGAA7AEsA"
         target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Atendimento via WhatsApp" tabindex="0">
-        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
     </a>
 
     <!-- BOTÃO VOLTAR AO TOPO -->
     <button type="button" class="btn-topo" id="btn-topo" aria-label="Voltar ao topo da página" hidden>
-        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+        <svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>
     </button>
 
     <!-- Modal para Ampliar Imagens do Portfólio -->
@@ -480,6 +532,9 @@
         <p id="modal-caption" class="modal-caption"></p>
     </div>
 
+    <!-- Script manual (nao injetado pelo HtmlWebpackPlugin, que roda com inject: false).
+         Mantido aqui para que o index.html funcione so, aberto direto no navegador.
+         No dev-server e no build ele e servido do bundle em js/script.js. -->
     <script src="js/script.js" defer></script>
 
 </body>
